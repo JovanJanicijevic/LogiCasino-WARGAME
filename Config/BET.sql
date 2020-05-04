@@ -1,0 +1,132 @@
+--------------------------------------------------------
+--  File created - Monday-May-04-2020   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table BET
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."BET" 
+   (	"ID" NUMBER, 
+	"CLIENT_ID" NUMBER, 
+	"NORMAL_BET" NUMBER DEFAULT 0, 
+	"TIE_BET" NUMBER DEFAULT 0, 
+	"STATUS" VARCHAR2(20 BYTE), 
+	"USER_CARD" VARCHAR2(20 BYTE), 
+	"DEALER_CARD" VARCHAR2(20 BYTE), 
+	"TIMESTAMP" LONG, 
+	"TOKEN" VARCHAR2(50 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" 
+  NO INMEMORY ("TIMESTAMP") ;
+REM INSERTING into SYSTEM.BET
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index BET_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."BET_PK" ON "SYSTEM"."BET" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Trigger BET_TRG1
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "SYSTEM"."BET_TRG1" 
+BEFORE INSERT ON BET 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "SYSTEM"."BET_TRG1" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger BET_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "SYSTEM"."BET_TRG" 
+BEFORE INSERT ON BET 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "SYSTEM"."BET_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger BET_TRG2
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "SYSTEM"."BET_TRG2" 
+BEFORE INSERT ON BET 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "SYSTEM"."BET_TRG2" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger BET_TRG3
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "SYSTEM"."BET_TRG3" 
+BEFORE INSERT ON BET 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "SYSTEM"."BET_TRG3" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger BET_TRG4
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "SYSTEM"."BET_TRG4" 
+BEFORE INSERT ON BET 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT BET_SEQ4.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "SYSTEM"."BET_TRG4" ENABLE;
+--------------------------------------------------------
+--  Constraints for Table BET
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."BET" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."BET" MODIFY ("CLIENT_ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."BET" ADD CONSTRAINT "BET_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "SYSTEM"."BET" MODIFY ("TOKEN" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table BET
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."BET" ADD CONSTRAINT "BET_FK1" FOREIGN KEY ("CLIENT_ID")
+	  REFERENCES "SYSTEM"."CLIENT" ("ID") ENABLE;
